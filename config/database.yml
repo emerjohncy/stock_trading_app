@@ -29,20 +29,20 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   port: 5432
   adapter: postgresql
-  username: <%= ENV.fetch("DATABASE_USERNAME") { '' } %>
-  password: <%= ENV.fetch("DATABASE_PASSWORD") { '' } %>
+  username: <%= ENV.fetch("STOCK_TRADING_APP_DATABASE_USERNAME") %>
+  password: <%= ENV.fetch("STOCK_TRADING_APP_DATABASE_PASSWORD") %>
 
 development: 
   <<: *default
-  database: rails_project_development
+  database: stock_trading_app_development
 
 test:
   <<: *default
-  database: rails_project_test
+  database: stock_trading_app_test
 
 production:
   <<: *default
-  detabase: rails_project_production
+  detabase: stock_trading_app_production
 
 
 
