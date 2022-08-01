@@ -16,8 +16,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_01_113529) do
 
   create_table "transactions", force: :cascade do |t|
     t.integer "user_id"
-    t.text "action"
-    t.text "status"
+    t.integer "stock_id"
+    t.string "action"
+    t.string "status"
     t.decimal "price"
     t.integer "units"
     t.datetime "created_at", null: false
