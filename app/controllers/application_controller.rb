@@ -1,13 +1,13 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def after_sign_in_path(resources)
-    if current_user.admin?
-      redirect admin_path
-    else
-      redirect home_path
-    end
-  end
+  # def after_sign_in_path(resources)
+  #   if current_user.admin?
+  #     redirect admin_path
+  #   else
+  #     redirect home_path
+  #   end
+  # end
    
   protected
 
