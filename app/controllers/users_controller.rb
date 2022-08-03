@@ -4,11 +4,11 @@ class UsersController < ApplicationController
 
     private
 
-    def admin_only
-      unless current_user.admin?
-        redirect_to root_path, :alert => "Access denied."
-      end
-    end
+    # def admin_only
+    #   unless current_user.admin?
+    #     redirect_to root_path, :alert => "Access denied."
+    #   end
+    # end
   
     def secure_params
       params.require(:user).permit(:role)
