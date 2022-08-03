@@ -60,6 +60,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'hamlit-rails'
 gem 'devise'
+gem 'iex-ruby-client'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
