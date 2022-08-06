@@ -5,8 +5,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  root 'homepage#home'
-  get '/admin', to: 'dashboard#admin_dashboard'
-  get '/trader', to: 'dashboard#trader_dashboard'
+  root 'pages#home'
+  get '/admin_dashboard' => 'pages#admin_dashboard',
+    as: 'admin'
+  get '/dashboard' => 'pages#trader_dashboard',
+    as: 'trader'
 
 end
