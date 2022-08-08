@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     authenticated :admin do
       namespace :admins do
         get 'dashboard/index', as: :authenticated_root
+        get 'dashboard/user/new', to: "dashboard#new"
+        post 'dashboard/users', to: "dashboard#create", as: :create_new_user
       end
     end
   end
