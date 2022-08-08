@@ -1,2 +1,20 @@
-<h1>Admins::Dashboard#index</h1>
-<p>Find me in app/views/admins/dashboard/index.html.haml</p>
+<h1>Admin</h1>
+
+<% @users.each do |user| %>
+  <table>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Balance</th>
+      <th>Status</th>
+    </tr>
+    <tr>
+      <td>fname</td>
+      <td>lname</td>
+      <td><%= user.email %></td>
+      <td>balance</td>
+      <td>status</td>
+    </tr>
+  </table>
+<% end %>
