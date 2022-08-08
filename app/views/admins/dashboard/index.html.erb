@@ -1,6 +1,4 @@
 <h1>Admin</h1>
-
-<% @users.each do |user| %>
   <table>
     <tr>
       <th>First Name</th>
@@ -9,6 +7,7 @@
       <th>Balance</th>
       <th>Status</th>
     </tr>
+    <% @users.each do |user| %>
     <tr>
       <td><%= user.first_name %></td>
       <td><%= user.last_name %></td>
