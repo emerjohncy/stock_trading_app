@@ -30,7 +30,16 @@ Rails.application.routes.draw do
   root to: 'homepage#home'
 
   # Stocks Routes
-  resources :stocks, only: [:index, :show]
+  # resources :stocks, only: [:index, :show, :update]
+
+  get '/stocks' => 'stocks#index',
+    as: 'stocks'
+  
+  get '/stocks/:id' => 'stocks#show',
+    as: 'stock'
+
+  patch '/stocks/:id' => 'stocks#update',
+    as: 'update_stock'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
