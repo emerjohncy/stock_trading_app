@@ -1,5 +1,5 @@
 <h1>Stocks</h1>
 
 <% @stocks. each do |stock| %>
-    <%= link_to stock.name, update_stock_path(stock.id) %><br>
+    <%= render "stock", stock: stock %><br>
 <% end %>
