@@ -20,9 +20,13 @@ Rails.application.routes.draw do
   devise_scope :admin do
     authenticated :admin do
       namespace :admins do
-        get 'dashboard/index', as: :authenticated_root
+        get 'dashboard/users', to: "dashboard#index", as: :authenticated_root
         get 'dashboard/user/new', to: "dashboard#new"
         post 'dashboard/users', to: "dashboard#create", as: :create_new_user
+        get 'dashboard/users/:id', to: "dashboard#show", as: :view_user
+        get 'dashboard/users/:id/edit', to: "dashboard#edit", as: :edit_user
+        patch 'dashboard/users/:id', to: "dashboard#update"
+        put 'dashboard/users/:id', to: "dashboard#update"
       end
     end
   end
