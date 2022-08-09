@@ -29,7 +29,8 @@ Rails.application.routes.draw do
 
   root to: 'homepage#home'
 
-  get '/stocks' => 'stocks#index'
+  # Stocks Routes
+  resources :stocks, only: [:index, :show]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

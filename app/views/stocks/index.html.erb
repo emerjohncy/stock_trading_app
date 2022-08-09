@@ -1,7 +1,5 @@
 <h1>Stocks</h1>
 
 <% @stocks. each do |stock| %>
-    <p><%= stock.name %></p>
-    <p><%= stock.code %></p>
-    <p><%= stock.price %></p>
+    <%= link_to stock.name, stock_path(stock.id) %><br>
 <% end %>
