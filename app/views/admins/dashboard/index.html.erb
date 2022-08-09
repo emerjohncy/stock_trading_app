@@ -13,8 +13,8 @@
       <td><%= user.first_name %></td>
       <td><%= user.last_name %></td>
       <td><%= user.email %></td>
-      <td>balance</td>
-      <td>status</td>
+      <td><%= user.balance %></td>
+      <td><%= user.status %></td>
       <td><%= link_to "Edit", admins_edit_user_path(user) %> | <%= link_to "View", admins_view_user_path(user) %></td>
     </tr>
     <% end %>

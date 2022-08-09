@@ -5,9 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable  
 
   enum status: [:pending, :active]
-  after_initialize :set_default_status, :if => :new_record?
+  after_initialize :set_default, :if => :new_record?
 
-  def set_default_status
+  def set_default
     self.status ||= :pending
+    self.balance ||= 10000.00
   end
+
 end
