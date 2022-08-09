@@ -23,6 +23,9 @@ Rails.application.routes.draw do
         get 'dashboard/index', as: :authenticated_root
         get 'dashboard/user/new', to: "dashboard#new"
         post 'dashboard/users', to: "dashboard#create", as: :create_new_user
+        get 'dashboard/users/:id', to: "dashboard#show", as: :view_user
+        get 'dashboard/users/:id/edit', to: "dashboard#edit", as: :edit_user
+        put 'dashboard/users/:id', to: "dashboard#update", as: :update_user
       end
     end
   end
