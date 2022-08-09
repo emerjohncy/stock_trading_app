@@ -1,2 +1,9 @@
-<h1>Users::Dashboard#index</h1>
-<p>Find me in app/views/users/dashboard/index.html.haml</p>
+<h1>Dashboard</h1>
+
+<h3>Balance</h3>
+<p><%= @balance %></p>
+<br>
+<h3>Stocks</h3>
+<% @stocks.each do |stock| %>
+    <%= link_to stock.name, update_stock_path(stock.id) %><br>
+<% end %>

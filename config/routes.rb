@@ -31,10 +31,6 @@ Rails.application.routes.draw do
 
   # Stocks Routes
   # resources :stocks, only: [:index, :show, :update]
-
-  get '/stocks' => 'stocks#index',
-    as: 'stocks'
-  
   get '/stocks/:id' => 'stocks#show',
     as: 'stock'
 
