@@ -27,22 +27,21 @@ class Admins::DashboardController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      flash[:notice] = "Account has been created successfully"
-      redirect_to @user
+    if @user.update_with_password(user_params)
+      flash[:notice] = "Account has been updated successfully"
+      redirect_to admins_view_user_path(@user)
     else
       flash.now[:alert] = "Something went wrong"
-      render :new, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
   private
-
   def set_user
     @user = User.find(params[:id])
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :current_password)
   end
 end
