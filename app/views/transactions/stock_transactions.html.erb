@@ -1,0 +1,10 @@
+<br>
+<% @transactions.each do |transaction| %>
+    <%= transaction.stock_id %><br>
+    <%= transaction.action %><br>
+    <%= transaction.status %><br>
+    <%= transaction.price %><br>
+    <%= transaction.units %><br>
+    <%= transaction.created_at %><br>
+    <br>
+<% end %>

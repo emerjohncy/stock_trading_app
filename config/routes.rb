@@ -34,6 +34,18 @@ Rails.application.routes.draw do
   get '/stocks/:id' => 'stocks#show',
     as: 'stock'
 
+  
+  # Transaction Routes
+  get '/transactions' => 'transactions#all_transactions',
+    as: 'transactions'
+  get '/user_transactions' => 'transactions#user_transactions',
+    as: 'user_transactions'
+  get '/users/:user_id/stocks/:id/transactions' => 'transactions#stock_transactions',
+    as: 'stock_transactions'
+  get '/users/:user_id/stocks/:id/transactions/buy' => 'transactions#buy',
+    as: 'buy_stock'
+  post '/users/:user_id/stocks/:id/transactions' => 'transactions#create'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

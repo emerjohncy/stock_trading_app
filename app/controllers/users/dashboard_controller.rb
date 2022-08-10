@@ -4,6 +4,7 @@ class Users::DashboardController < ApplicationController
   def index
     @balance = @user.balance
     @stocks = Stock.all
+    @recent_transactions = @user.transactions.last(3).reverse
   end
 
   private

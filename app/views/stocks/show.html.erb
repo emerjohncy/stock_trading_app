@@ -2,7 +2,7 @@
 <h3><%= @stock.code %></h3>
 <h3><%= @stock.price %></h3>
 
-<%= button_to "Buy" %>
+<%= link_to "Buy", buy_stock_path(@user.id, @stock.id) %>
 <br>
 <br>
 <br>
