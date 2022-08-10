@@ -27,6 +27,7 @@ Rails.application.routes.draw do
         get 'dashboard/users/:id/edit', to: "dashboard#edit", as: :edit_user
         patch 'dashboard/users/:id', to: "dashboard#update"
         put 'dashboard/users/:id', to: "dashboard#update"
+        patch 'dashboard/users/:id', to: "dashboard#change_status", as: :change_status
       end
     end
   end

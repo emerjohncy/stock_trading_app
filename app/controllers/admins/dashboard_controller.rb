@@ -1,5 +1,5 @@
 class Admins::DashboardController < ApplicationController
-  before_action :set_user, only: %i[ show edit update ]
+  before_action :set_user, only: %i[ show edit update change_status ]
   
   def index
     @users = User.all
@@ -33,6 +33,15 @@ class Admins::DashboardController < ApplicationController
     else
       flash.now[:alert] = "Something went wrong"
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def change_status
+    if @user.update_attribute(status: params[:status])
+      flash[:notice] = "Status updated to #{@user.status}"
+    else
+      flash.now[:alert] = "Something went wrong"
+      render @user, status: :unprocessable_entity
     end
   end
   
