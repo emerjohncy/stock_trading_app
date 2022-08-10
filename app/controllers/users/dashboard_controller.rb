@@ -3,7 +3,7 @@ class Users::DashboardController < ApplicationController
 
   def index
     @balance = @user.balance
-    @stocks = Stock.all
+    @stocks = Stock.all.order('created_at ASC')
     @recent_transactions = @user.transactions.last(3).reverse
   end
 
