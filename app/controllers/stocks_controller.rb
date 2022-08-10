@@ -3,19 +3,9 @@ class StocksController < ApplicationController
 
     def show
         @stock = Stock.find(params[:id])
-    end
-    
-    def update
-        @stock = Stock.find(params[:id])
-    
         client = IEX::Api::Client.new
         @updated_price = client.quote(@stock.code).latest_price
-        
-        if @stock.price != @updated_price
-            @stock.update(:price => @updated_price)
-            redirect_to stock_path(@stock.id)
-        else
-            render :show
-        end
+        @stock.update(price: @updated_price)
+        @stock.save
     end
 end

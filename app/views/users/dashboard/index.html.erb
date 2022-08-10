@@ -5,5 +5,5 @@
 <br>
 <h3>Stocks</h3>
 <% @stocks.each do |stock| %>
-    <%= link_to stock.name, update_stock_path(stock.id) %><br>
+    <%= link_to stock.name, stock_path(stock.id) %><br>
 <% end %>
