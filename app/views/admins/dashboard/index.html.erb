@@ -6,6 +6,7 @@
       <th>Email</th>
       <th>Balance</th>
       <th>Status</th>
+      <th>Change Status</th>
       <th>Action</th>
     </tr>
     <% @users.each do |user| %>
@@ -13,8 +14,9 @@
       <td><%= user.first_name %></td>
       <td><%= user.last_name %></td>
       <td><%= user.email %></td>
-      <td>balance</td>
-      <td>status</td>
+      <td><%= user.balance %></td>
+      <td><%= user.status %></td>
+      <td></td>
       <td><%= link_to "Edit", admins_edit_user_path(user) %> | <%= link_to "View", admins_view_user_path(user) %></td>
     </tr>
     <% end %>
