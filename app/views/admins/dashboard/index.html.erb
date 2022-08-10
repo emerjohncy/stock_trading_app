@@ -17,7 +17,7 @@
       <td><%= user.balance %></td>
       <td><%= user.status %></td>
       <td><% @users.statuses.each_key do |status| %>
-        <%= link_to admins_change_status_path(user, {status: status}), method: :patch, class: "btn btn-primary", "data-no-turbolink" => true do %>
+        <%= link_to admins_change_status_path(user, {status: status}), "data-turbo-method" => :patch, class: "btn btn-primary", "data-no-turbolink" => true do %>
           <%= status %>
         <% end %>
       <% end %>
