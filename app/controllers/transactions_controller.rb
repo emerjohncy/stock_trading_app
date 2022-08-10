@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
     before_action :authenticate_admin!, only: [:all_transactions]
-    before_action :authenticate_user!, only: [:buy, :create, :stock_transactions]
+    before_action :authenticate_user!, only: [:buy, :create, :stock_transactions, :user_transactions]
     before_action :get_user, only: [:buy, :create, :stock_transactions, :user_transactions]
     before_action :get_stock, only: [:buy, :create, :stock_transactions]
 
