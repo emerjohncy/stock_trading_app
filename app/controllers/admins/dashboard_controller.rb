@@ -37,8 +37,9 @@ class Admins::DashboardController < ApplicationController
   end
 
   def change_status
-    if @user.update_attribute(status: params[:status])
+    if @user.update(status: params[:status])
       flash[:notice] = "Status updated to #{@user.status}"
+      redirect_to admins_authenticated_root_path
     else
       flash.now[:alert] = "Something went wrong"
       render @user, status: :unprocessable_entity
