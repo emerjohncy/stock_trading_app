@@ -1,0 +1,12 @@
+<br>
+<h1>My Transactions</h1>
+<% @transactions.each do |transaction| %>
+    <%= transaction.stock.name %><br>
+    <%= transaction.stock.code %><br>
+    <%= transaction.action %><br>
+    <%= transaction.status %><br>
+    <%= transaction.price %><br>
+    <%= transaction.units %><br>
+    <%= transaction.created_at %><br>
+    <br>
+<% end %>

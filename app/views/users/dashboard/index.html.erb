@@ -1,2 +1,23 @@
-<h1>Users::Dashboard#index</h1>
-<p>Find me in app/views/users/dashboard/index.html.haml</p>
+<h1>Dashboard</h1>
+
+<h3>Balance</h3>
+<p><%= @balance %></p>
+<br>
+
+<h3>Stocks</h3>
+<% @stocks.each do |stock| %>
+    <%= link_to stock.name, stock_path(stock.id) %><br>
+<% end %>
+<br>
+
+<h1><span>Recent Transactions</span> <%= link_to "View All", user_transactions_path %></h1>
+<% @recent_transactions.each do |recent| %>
+    <%= recent.stock.code %><br>
+    <%= recent.stock.name %><br>
+    <%= recent.action %><br>
+    <%= recent.status %><br>
+    <%= recent.price %><br>
+    <%= recent.units %><br>
+    <%= recent.created_at %><br>
+    <br>
+<% end %>
