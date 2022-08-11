@@ -11,14 +11,12 @@ class Users::DashboardController < ApplicationController
 
   def get_user
     @user = User.find(current_user.id)
-    @user = User.all 
-    @user.each do |user|
-      if user.status == "pending"
-        flash[:notice] = "Waiting for approval"
-        redirect_to root_path and return
-      else
-        redirect_to users_authenticated_root 
-      end
+    if @user.status == "pending"
+      flash[:notice] = "Waiting for approval"
+      redirect_to root_path 
+    elsif @user.status == "deactivate"
+      flash[:notice] = "deactivate account"
+      redirect_to root_path 
     end
   end
 end
