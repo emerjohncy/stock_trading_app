@@ -5,6 +5,16 @@ class Users::DashboardController < ApplicationController
     @balance = @user.balance
     @stocks = Stock.all.order('created_at ASC')
     @recent_transactions = @user.transactions.last(3).reverse
+    if @user.transactions.exists?
+      @user.transactions.each do |transaction|
+        total = transaction.price * transaction.units
+        if transaction.action == "Buy"
+          @balance = @balance - total
+        else
+          @balance = @balance + total
+        end
+      end
+    end
   end
 
   private
