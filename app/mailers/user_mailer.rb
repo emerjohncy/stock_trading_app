@@ -5,4 +5,9 @@ class UserMailer < ApplicationMailer
         @user = params[:user]
         mail(to: @user.email, subject: 'Welcome to [AppName]')
     end
+
+    def status_approve
+        @user = params[:user]
+        mail(to: @user.email, subject: 'AppName Account Approval')
+    end
 end
