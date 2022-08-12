@@ -20,30 +20,38 @@ class Users::DashboardController < ApplicationController
   end
 
   def portfolio
-    @user_stocks = Hash.new
-    @stocks_owned = []
-
+    # Separate all Buy Transactions and Sell Transactions
     @buy_transactions = @user.transactions.where(action: "Buy")
-    @sell_transactions = 
-    @stocks_transacted_buy = @user.transactions.where(action: "Buy").map{ |transaction| transaction.stock }.uniq
-    # @stocks_owned = @stocks_transacted_buy.uniq
+    @sell_transactions = @user.transactions.where(action: "Sell")
 
-    # Number of Units per Stock
-    for i in 0...@stocks_transacted_buy.length do
-      @user_stocks[@stocks_transacted_buy[i].name] = 0
-      @stock_transactions = @user.transactions.where(action: "Buy", stock_id: @stocks_transacted_buy[i].id)
-      @stock_transactions.each do |transaction|
-        @user_stocks[@stocks_transacted_buy[i].name] += transaction.units
-      end
-    end
+    # Get all unique stocks per transaction type
+    @stocks_bought = @buy_transactions.map{ |transaction| transaction.stock }.uniq
+    @stocks_sold = @sell_transactions.map{ |transaction| transaction.stock }.uniq
 
-    @user_stocks.each do |stock, units|
-      if units != 0
-        @stocks_owned.push(stock)
-      end
-    end
-
+    # Store each stock obj to an array and default units to 0
+    @user_stocks = @stocks_bought.map{ |stock| {id: stock.id, name: stock.name, units: 0} }
     
+    # Add all units from all buy transactions for each stock
+    for i in 0...@stocks_bought.length do
+      index = @user_stocks.index{ |stock| stock[:id] == @stocks_bought[i].id }
+      @stock_transactions = @buy_transactions.where(stock_id: @stocks_bought[i].id)
+      @stock_transactions.each do |transaction|
+        @user_stocks[i][:units] += transaction.units
+      end
+    end
+
+    # Deduct all units from all sell transactions for each stock
+    for i in 0...@stocks_sold.length do
+      index = @user_stocks.index{ |stock| stock[:id] == @stocks_sold[i].id }
+      @stock_transactions = @sell_transactions.where(stock_id: @stocks_sold[i].id)
+      @stock_transactions.each do |transaction|
+        @user_stocks[index][:units] -= transaction.units
+      end
+    end
+
+    # Get stocks only with units not equal to 0
+    @stocks_owned = @user_stocks.select{ |stock| stock[:units] != 0 }
+
   end
 
   private
