@@ -3,4 +3,17 @@
 <p>Last Name:<%= @user.last_name %></p>
 <p>Email: <%= @user.email %></p>
 <p>Status: <%= @user.status %></p>
+<p>Balance: <%= @user.balance %></p>
+
+<h3>Transactions</h3>
+<% @user.transactions.each do |transaction| %>
+  <%= transaction.stock.name %><br>
+  <%= transaction.stock.code %><br>
+  <%= transaction.action %><br>
+  <%= transaction.status %><br>
+  <%= transaction.price %><br>
+  <%= transaction.units %><br>
+  <%= transaction.created_at %><br>
+  <br>
+<% end %>
 
