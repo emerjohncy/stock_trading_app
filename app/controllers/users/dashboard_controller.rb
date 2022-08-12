@@ -8,10 +8,12 @@ class Users::DashboardController < ApplicationController
     if @user.transactions.exists?
       @user.transactions.each do |transaction|
         total = transaction.price * transaction.units
-        if transaction.action == "Buy"
+        if transaction.action == "Buy" && @balance >= total
           @balance = @balance - total
-        else
+        elsif transaction.action == "Sell"
           @balance = @balance + total
+        else
+          flash[:alert] = "Insuffient Balance"
         end
       end
     end
