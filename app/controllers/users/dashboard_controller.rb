@@ -19,6 +19,9 @@ class Users::DashboardController < ApplicationController
     end
   end
 
+  def portfolio
+  end
+
   private
 
   def get_user
