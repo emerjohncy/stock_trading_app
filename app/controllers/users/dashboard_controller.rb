@@ -13,7 +13,7 @@ class Users::DashboardController < ApplicationController
         elsif transaction.action == "Sell"
           @balance = @balance + total
         else
-          flash[:alert] = "Insuffient Balance"
+          flash[:alert] = "Insufficient Balance"
         end
       end
     end
