@@ -48,9 +48,13 @@
       </div>
     </div>
   </nav>
-    
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
   <%= yield %>
+  <footer>
+    <p>Collaboration Project by:</p>
+    <p class="developers"><a href="https://github.com/emerjohncy"><%= image_tag("github-icon.png") %> @emerjohncy</a> | <a href="https://github.com/grailwilly"><%= image_tag("github-icon.png") %>@grailwilly</a></p>
+    <p class="app-code"><a href="https://github.com/emerjohncy/stock_trading_app">Github code</a></p>
+  </footer>
   </body>
 </html>

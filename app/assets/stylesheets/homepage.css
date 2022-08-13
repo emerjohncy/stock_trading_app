@@ -1,8 +1,9 @@
 .homepage {
   width: 100%;
-  height: 85vh;
+  height: 75vh;
   background-image: url("landing-page.png");
   background-size: cover;
+  background-position: center;
 }
 
 .navbar {
@@ -22,3 +23,13 @@
   font-size: 25px;
   padding: 15%;
 }
+
+footer {
+  text-align: center;
+  padding-top: 20px;
+}
+
+footer p {
+  margin: 0;
+}
+
