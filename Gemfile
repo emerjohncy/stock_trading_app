@@ -51,7 +51,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem 'pg'
 # gem 'puma', '~> 4.1'
 gem 'sass-rails', '>= 6'
-gem 'webpacker', '~> 3.0'
+# gem 'webpacker', '~> 3.0'
 gem 'psych', '< 4'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
@@ -61,6 +61,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'hamlit-rails'
 gem 'devise'
 gem 'iex-ruby-client'
+
+gem 'bootstrap'
+gem 'jquery-rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

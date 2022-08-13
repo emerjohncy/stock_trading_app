@@ -1,0 +1,24 @@
+.homepage {
+  width: 100%;
+  height: 85vh;
+  background-image: url("landing-page.png");
+  background-size: cover;
+}
+
+.navbar {
+  background-color: #2a66ff;
+}
+
+.nav-link {
+  color: #fff !important;
+}
+
+.heading {
+  font-size:70px;
+  padding: 10%;
+}
+
+.description {
+  font-size: 25px;
+  padding: 15%;
+}
