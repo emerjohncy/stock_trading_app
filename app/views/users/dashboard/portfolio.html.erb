@@ -5,6 +5,6 @@
     <%= stock[:name] %>
     <%= stock[:units] %> units
     <%= link_to "Buy",  buy_stock_path(@user.id, stock[:id]) %>
-    <%= link_to "Sell" %>   <%# insert sell transaction path here %>
+    <%= link_to "Sell", sell_stock_path(@user.id, stock[:id]) %>
     <br>
 <% end %>
