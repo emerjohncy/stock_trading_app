@@ -27,5 +27,5 @@ to easily check if there's a new trader sign up.
 Additional Feature
 - Add feature for syncing stock's price from the iex-ruby-client gem (use namespace)
 
-## Development
+## Deployment
 - Heroku [Demo](https://glacial-gorge-31771.herokuapp.com/)
