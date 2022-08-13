@@ -1,0 +1,11 @@
+<br>
+<%= @stock.name %><br>
+<%= @stock.code %><br>
+<%= @stock.price %><br>
+
+<%= form_with model: [@stock, @transaction], url: sell_transactions_path(@user.id, @stock.id), local: true do |f| %>
+    <%= f.label :units %>
+    <%= f.number_field :units %>
+
+    <%= f.submit "Sell" %>
+<% end %>

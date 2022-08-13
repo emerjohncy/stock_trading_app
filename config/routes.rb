@@ -47,11 +47,17 @@ Rails.application.routes.draw do
     as: 'transactions'
   get '/user_transactions' => 'transactions#user_transactions',
     as: 'user_transactions'
-  get '/users/:user_id/stocks/:id/transactions' => 'transactions#stock_transactions',
-    as: 'stock_transactions'
-  get '/users/:user_id/stocks/:id/transactions/buy' => 'transactions#buy',
-    as: 'buy_stock'
-  post '/users/:user_id/stocks/:id/transactions' => 'transactions#create'
+    get '/users/:user_id/stocks/:id/transactions' => 'transactions#stock_transactions',
+      as: 'stock_transactions'
+    get '/users/:user_id/stocks/:id/transactions/buy' => 'transactions#buy',
+      as: 'buy_stock'
+    post '/users/:user_id/stocks/:id/transactions' => 'transactions#create'
+    get '/users/:user_id/stocks/:id/sell_transactions' => 'transactions#sell_transactions',
+      as: 'sell_transactions'
+    get '/users/:user_id/stocks/:id/sell_transactions/new' => 'transactions#sell',
+    as: 'sell_stock'
+    post '/users/:user_id/stocks/:id/sell_transactions' => 'transactions#create_sell'
+    
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
