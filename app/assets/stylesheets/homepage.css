@@ -4,3 +4,11 @@
   background-image: url("landing-page.png");
   background-size: cover;
 }
+
+.navbar {
+  background-color: #2a66ff;
+}
+
+.nav-link {
+  color: #fff !important;
+}
