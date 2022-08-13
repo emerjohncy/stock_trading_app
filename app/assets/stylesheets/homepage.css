@@ -12,3 +12,13 @@
 .nav-link {
   color: #fff !important;
 }
+
+.heading {
+  font-size:70px;
+  padding: 10%;
+}
+
+.description {
+  font-size: 25px;
+  padding: 15%;
+}
