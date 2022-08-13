@@ -9,10 +9,12 @@
   text-align: center;
 }
 
-#user_email {
+#user_email, #user_password, 
+#user_first_name, #user_last_name, 
+#user_password_confirmation {
   width: 50%;
 }
 
-#user_password {
-  width: 50%;
+.actions {
+  padding: 20px;
 }
