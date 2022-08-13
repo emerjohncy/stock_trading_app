@@ -27,11 +27,16 @@ class TransactionsController < ApplicationController
         @transaction.status = "Open"
         @transaction.price = @stock.price
         
-        if @transaction.save
-            flash[:notice] = "Bought a Stocks"
+        @total_price = @transaction.units * @stock.price
+
+        if @total_price <= @user.balance
+            @transaction.save
+            @user.balance -= @total_price
+            @user.save
+            flash[:notice] = "Bought #{@transaction.units} units of #{@stock.code}"
             redirect_to users_portfolio_path
         else
-            flash[:alert] = "insufficient Balance"
+            flash[:alert] = "Insufficient Balance"
             render :buy, status: :unprocessable_entity
         end
     end
@@ -63,6 +68,7 @@ class TransactionsController < ApplicationController
             @transaction.save
             @profit = @transaction.price * @transaction.units
             @user.balance += @profit
+            @user.save
             flash[:notice] = "Sold #{@transaction.units} units of #{@stock.code}"
             redirect_to users_portfolio_path
         elsif @transaction.units > @max_stocks
