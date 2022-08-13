@@ -40,7 +40,7 @@ class TransactionsController < ApplicationController
  
         if @transaction.save
           flash[:notice] = "Bought a Stocks"
-          redirect_to users_authenticated_root_path   #change redirect path to portfolio path once available
+          redirect_to users_portfolio_path
         else
           flash[:alert] = "insufficient Balance"
           render :buy, status: :unprocessable_entity

@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   devise_scope :user do
     authenticated :user do
       namespace :users do
-        get 'dashboard/index', as: :authenticated_root
+        get 'dashboard', to: "dashboard#index", as: :authenticated_root
+        get 'portfolio' => "dashboard#portfolio",
+          as: 'portfolio'
       end
     end
   end

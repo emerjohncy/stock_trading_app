@@ -1,0 +1,10 @@
+<h1>Portfolio</h1>
+
+<h3>Stocks Owned</h3>
+<% @stocks_owned.each do |stock| %>
+    <%= stock[:name] %>
+    <%= stock[:units] %> units
+    <%= link_to "Buy",  buy_stock_path(@user.id, stock[:id]) %>
+    <%= link_to "Sell" %>   <%# insert sell transaction path here %>
+    <br>
+<% end %>
