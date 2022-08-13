@@ -3,7 +3,7 @@
 <%= @stock.code %><br>
 <%= @stock.price %><br>
 
-<%= form_with model: [@stock, @transaction], local: true do |f| %>
+<%= form_with model: [@stock, @transaction], url: buy_transactions_path(@user.id, @stock.id), local: true do |f| %>
     <%= f.label :units %>
     <%= f.number_field :units, min: 1 %>
 
