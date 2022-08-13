@@ -62,15 +62,24 @@ class TransactionsController < ApplicationController
             @transaction.action = "Sell"
             @transaction.status = "Close"
             @transaction.price = @stock.price
-     
-            if @transaction.save
+
+            # Get max stocks that can be bought
+            @max_stocks = 0
+            @buy_transactions = @user.transactions.where(action: "Buy")
+            @buy_stock_transactions = @buy_transactions.where(stock_id: @stock.id)
+            @buy_stock_transactions.each do |transaction|
+                @max_stocks += transaction.units
+            end
+
+            if @transaction.units <= @max_stocks
+                @transaction.save
                 @profit = @transaction.price * @transaction.units
                 @user.balance += @profit
                 flash[:notice] = "Sold #{@transaction.units} units of #{@stock.code}"
                 redirect_to users_portfolio_path
-            else
-                flash[:alert] = "insufficient Number of Units"
-                render :sel, status: :unprocessable_entity
+            elsif @transaction.units > @max_stocks
+                flash[:alert] = "Insufficient Number of Units"
+                render :sell, status: :unprocessable_entity
             end
         end
         
