@@ -1,8 +1,8 @@
 class TransactionsController < ApplicationController
     before_action :authenticate_admin!, only: [:all_transactions]
-    before_action :authenticate_user!, only: [:buy, :sell, :create, :create_sell, :stock_transactions, :sell_transactions, :user_transactions]
-    before_action :get_user, only: [:buy, :sell, :create, :create_sell, :stock_transactions, :sell_transactions, :user_transactions]
-    before_action :get_stock, only: [:buy, :sell, :create, :create_sell, :stock_transactions, :sell_transactions]
+    before_action :authenticate_user!, only: [:user_transactions, :buy, :sell, :create_buy, :create_sell, :buy_transactions, :sell_transactions]
+    before_action :get_user, only: [:user_transactions, :buy_transactions, :buy, :create_buy, :sell_transactions, :create_sell, :sell]
+    before_action :get_stock, only: [:buy_transactions, :buy, :create_buy, :sell_transactions, :create_sell, :sell]
 
     def all_transactions
         @transactions = Transaction.all
@@ -12,85 +12,79 @@ class TransactionsController < ApplicationController
         @transactions = @user.transactions.order('created_at DESC')
     end
 
-    def stock_transactions
+    def buy_transactions
         @transactions = @user.transactions.where(stock_id: @stock.id, action: "Buy")
     end
 
     def buy
         @transaction = @user.transactions.build
-        # @transaction.stock_id = @stock.id
-        # @transaction.action = "Buy"
-        # @transaction.status = "Open"
-        # @transaction.price = @stock.price
     end
     
-    def create
-        # transaction_params = {
-            #     stock_id: @stock.id,
-            #     action: "Buy",
-            #     status: "Open",
-            #     price: @stock.price
-            # }
-            
-            @transaction = @user.transactions.build(transaction_params)
-            @transaction.stock_id = @stock.id
-            @transaction.action = "Buy"
-            @transaction.status = "Open"
-            @transaction.price = @stock.price
-            
-            if @transaction.save
-                flash[:notice] = "Bought a Stocks"
-                redirect_to users_portfolio_path
-            else
-                flash[:alert] = "insufficient Balance"
-                render :buy, status: :unprocessable_entity
-            end
-        end
+    def create_buy
+        @transaction = @user.transactions.build(transaction_params)
+        @transaction.stock_id = @stock.id
+        @transaction.action = "Buy"
+        @transaction.status = "Open"
+        @transaction.price = @stock.price
         
-        
-        def sell_transactions
-            @transactions = @user.transactions.where(stock_id: @stock.id, action: "Sell")
-        end
-    
-        def sell
-            @transaction = @user.transactions.build
-        end
-    
-        def create_sell
-            @transaction = @user.transactions.build(transaction_params)
-            @transaction.stock_id = @stock.id
-            @transaction.action = "Sell"
-            @transaction.status = "Close"
-            @transaction.price = @stock.price
+        @total_price = @transaction.units * @stock.price
 
-            # Get max stocks that can be bought
-            @max_stocks = 0
-            @buy_transactions = @user.transactions.where(action: "Buy")
-            @buy_stock_transactions = @buy_transactions.where(stock_id: @stock.id)
-            @buy_stock_transactions.each do |transaction|
-                @max_stocks += transaction.units
-            end
+        if @total_price <= @user.balance
+            @transaction.save
+            @user.balance -= @total_price
+            @user.save
+            flash[:notice] = "Bought #{@transaction.units} units of #{@stock.code}"
+            redirect_to users_portfolio_path
+        else
+            flash[:alert] = "Insufficient Balance"
+            render :buy, status: :unprocessable_entity
+        end
+    end
+        
+    def sell_transactions
+        @transactions = @user.transactions.where(stock_id: @stock.id, action: "Sell")
+    end
 
-            if @transaction.units <= @max_stocks
-                @transaction.save
-                @profit = @transaction.price * @transaction.units
-                @user.balance += @profit
-                flash[:notice] = "Sold #{@transaction.units} units of #{@stock.code}"
-                redirect_to users_portfolio_path
-            elsif @transaction.units > @max_stocks
-                flash[:alert] = "Insufficient Number of Units"
-                render :sell, status: :unprocessable_entity
-            end
+    def sell
+        @transaction = @user.transactions.build
+    end
+
+    def create_sell
+        @transaction = @user.transactions.build(transaction_params)
+        @transaction.stock_id = @stock.id
+        @transaction.action = "Sell"
+        @transaction.status = "Close"
+        @transaction.price = @stock.price
+
+        # Get max stocks that can be bought
+        @max_stocks = 0
+        @buy_transactions = @user.transactions.where(action: "Buy")
+        @buy_stock_transactions = @buy_transactions.where(stock_id: @stock.id)
+        @buy_stock_transactions.each do |transaction|
+            @max_stocks += transaction.units
         end
-        
-        private
-        
-        def get_user
-            @user = User.find(current_user.id)
+
+        if @transaction.units <= @max_stocks
+            @transaction.save
+            @profit = @transaction.price * @transaction.units
+            @user.balance += @profit
+            @user.save
+            flash[:notice] = "Sold #{@transaction.units} units of #{@stock.code}"
+            redirect_to users_portfolio_path
+        elsif @transaction.units > @max_stocks
+            flash[:alert] = "Insufficient Number of Units"
+            render :sell, status: :unprocessable_entity
         end
-        
-        def get_stock
-            @stock = Stock.find(params[:id])
+    end
+    
+    private
+    
+    def get_user
+        @user = User.find(current_user.id)
+    end
+    
+    def get_stock
+        @stock = Stock.find(params[:id])
     end
 
     def transaction_params
