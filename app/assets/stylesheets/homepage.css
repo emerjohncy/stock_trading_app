@@ -10,7 +10,7 @@
   background-color: #2a66ff;
 }
 
-.nav-link {
+.nav-link, .nav-item a {
   color: #fff !important;
 }
 
