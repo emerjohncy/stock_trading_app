@@ -23,7 +23,8 @@ stocks.each do |stock|
     stock_params = {
         name: stock[:name],
         code: stock[:code],
-        price: stock[:price]
+        price: stock[:price],
+        logo_url: client.logo(stock[:code]).url
     }
     Stock.create(stock_params)
 end

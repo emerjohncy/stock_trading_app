@@ -8,6 +8,7 @@
 
 <h3>Stocks</h3>
 <% @stocks.each do |stock| %>
+    <%= image_tag(stock.logo_url) %>
     <%= link_to stock.name, stock_path(stock.id) %><br>
 <% end %>
 <br>
