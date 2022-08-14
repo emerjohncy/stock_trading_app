@@ -20,6 +20,10 @@ class Users::DashboardController < ApplicationController
   end
 
   def portfolio
+    @balance = @user.balance
+
+    client = IEX::Api::Client.new
+
     # Separate all Buy Transactions and Sell Transactions
     @buy_transactions = @user.transactions.where(action: "Buy")
     @sell_transactions = @user.transactions.where(action: "Sell")
@@ -29,7 +33,7 @@ class Users::DashboardController < ApplicationController
     @stocks_sold = @sell_transactions.map{ |transaction| transaction.stock }.uniq
 
     # Store each stock obj to an array and default units to 0
-    @user_stocks = @stocks_bought.map{ |stock| {id: stock.id, name: stock.name, units: 0} }
+    @user_stocks = @stocks_bought.map{ |stock| {id: stock.id, name: stock.name, code: stock.code, units: 0, price: stock.price, logo_url: stock.logo_url, change: client.quote(stock.code).change_percent_s} }
     
     # Add all units from all buy transactions for each stock
     for i in 0...@stocks_bought.length do
@@ -51,7 +55,6 @@ class Users::DashboardController < ApplicationController
 
     # Get stocks only with units not equal to 0
     @stocks_owned = @user_stocks.select{ |stock| stock[:units] != 0 }
-
   end
 
   private
