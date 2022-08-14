@@ -49,11 +49,11 @@ Rails.application.routes.draw do
     as: 'user_transactions'
   
     # For Buy
-  get '/users/:user_id/stocks/:id/transactions' => 'transactions#buy_transactions',
+  get '/users/:user_id/stocks/:id/buy_transactions' => 'transactions#buy_transactions',
     as: 'buy_transactions'
   get '/users/:user_id/stocks/:id/buy_transactions/new' => 'transactions#buy',
     as: 'buy_stock'
-  post '/users/:user_id/stocks/:id/transactions' => 'transactions#create_buy'
+  post '/users/:user_id/stocks/:id/buy_transactions' => 'transactions#create_buy'
     # For Sell
   get '/users/:user_id/stocks/:id/sell_transactions' => 'transactions#sell_transactions',
     as: 'sell_transactions'
