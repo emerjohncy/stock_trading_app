@@ -1,8 +1,8 @@
-.session-img {
+.session-img, .admin-session-img {
   height: 75vh;
 }
 
-.session-login {
+.session-login, .admin-session-login {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,7 +11,7 @@
 
 #user_email, #user_password, 
 #user_first_name, #user_last_name, 
-#user_password_confirmation {
+#user_password_confirmation, #admin_email, #admin_password {
   width: 50%;
 }
 
