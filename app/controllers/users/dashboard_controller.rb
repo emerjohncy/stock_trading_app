@@ -20,6 +20,8 @@ class Users::DashboardController < ApplicationController
   end
 
   def portfolio
+    @balance = @user.balance
+
     client = IEX::Api::Client.new
 
     # Separate all Buy Transactions and Sell Transactions
