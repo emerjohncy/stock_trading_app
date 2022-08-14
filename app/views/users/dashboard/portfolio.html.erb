@@ -7,6 +7,10 @@
     </div>
 
     <h3>Assets</h3>
+    <% if @stocks_owned.count == 0 %>
+      <div class="fst-italic text-center m-4">No assets owned yet</div>
+    <% end %>
+
     <div class="row">
         <% @stocks_owned.each do |stock| %>
             <div class="col-lg-3 py-3">

@@ -39,6 +39,10 @@
       </div>
     </div>
 
+    <% if @recent_transactions.count == 0 %>
+      <div class="fst-italic text-center m-4">No transactions made yet</div>
+    <% end %>
+
     <div class="row border-light shadow rounded">
       <% @recent_transactions.each do |recent| %>
           <div class="row-12 px-4 py-2 ">
