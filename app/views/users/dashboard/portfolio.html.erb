@@ -1,6 +1,13 @@
 <div class="container-fluid">
     <h1>Portfolio</h1>
 
+    <div class="my-3">
+        <h3>Total Balance</h3>
+        <div class="fs-1 fw-bold">
+            $ <%= @balance %>
+        </div>
+    </div>
+
     <h3>Assets</h3>
     <div class="row">
         <% @stocks_owned.each do |stock| %>
