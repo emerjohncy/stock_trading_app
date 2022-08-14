@@ -1,28 +1,75 @@
-<%= link_to "Portfolio", users_portfolio_path %>
+<%#= link_to "Portfolio", users_portfolio_path %>
+<div class="container-fluid">
+  <h1>Dashboard</h1>
 
-<h1>Dashboard</h1>
+  <div class="my-3">
+      <h3>Total Balance</h3>
+      <div class="fs-1 fw-bold">
+          $ <%= @balance %>
+      </div>
+  </div>
 
-<h3>Balance</h3>
-<p><%= @balance %></p>
-<br>
 
-<h3>Stocks</h3>
-<% @stocks.each do |stock| %>
-    <%= image_tag(stock.logo_url) %>
-    <%= link_to stock.name, stock_path(stock.id) %><br>
-<% end %>
-<br>
+  <div class="row">
+    <div class="col-lg-8">
+      <h3 class="m-0">Available Stocks</h3>
+      <div class="row">
+        <% @stocks.each do |stock| %>
+          <%= link_to stock_path(stock.id), class: "col-xl-5 py-3 border-light shadow rounded m-2 align-middle text-decoration-none text-dark" do %>
+          <div class="d-flex flex-row justify-content-between">
+            <div class="d-flex flex-row align-items-center">
+              <%= image_tag(stock.logo_url, class: "dashboard-stock-logo") %>
+              <div class="d-flex flex-column justify-content-between ps-2">
+                <div class="fw-bold"><%= stock.code %></div>
+                <div class="text-secondary"><%= stock.name %></div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="fw-bold">$ <%= stock.price %></div>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
 
-<h1><span>Recent Transactions</span> <%= link_to "View All", user_transactions_path %></h1>
-<% @recent_transactions.each do |recent| %>
-  <%# if @balance >= recent.price * recent.units %>
-    <%= recent.stock.code %><br>
-    <%= recent.stock.name %><br>
-    <%= recent.action %><br>
-    <%= recent.status %><br>
-    <%= recent.price %><br>
-    <%= recent.units %><br>
-    <%= recent.created_at %><br>
-    <br>
-  <%# end %>
-<% end %>
+  <div class="col-lg-4 px-5">
+    <div class="row">
+      <div class="d-flex flex-row justify-content-between align-items-center">
+        <h3 class="m-0">Recent Transactions</h3>
+        <span><%= link_to "See All >", user_transactions_path, class: "fs-6 align-middle text-decoration-none text-secondary" %></span>
+      </div>
+    </div>
+
+    <div class="row border-light shadow rounded">
+      <% @recent_transactions.each do |recent| %>
+          <div class="row-12 px-4 py-2 ">
+            <div class="d-flex flex-row justify-content-between align-items-center">
+              <div class="d-flex flex-row justify-content-start align-items-center">
+                <% if recent.action == "Buy" %>
+                  <i class="bi bi-arrow-down-left-square text-success fs-1"></i>
+                <% elsif recent.action == "Sell" %>
+                  <i class="bi bi-arrow-up-right-square text-danger fs-1"></i>
+                <% end %>
+                <div class="d-flex flex-column justify-content-center ms-2">
+                  <div class="fw-bold"><%= recent.action %> <%= recent.stock.code %></div>
+                  <div class="text-secondary"><%= recent.created_at %></div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-column justify-content-center align-items-end">
+                <div class="fw-bold">
+                  <% if recent.units == 1 %>
+                    <%= recent.units %> unit
+                  <% else %>
+                    <%= recent.units %> units
+                  <% end %>
+                </div>
+                <div class="text-secondary">$ <%= recent.price %></div>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
