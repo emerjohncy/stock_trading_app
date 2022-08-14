@@ -1,10 +1,19 @@
-<h1>Portfolio</h1>
+<div class="container-fluid">
+    <h1>Portfolio</h1>
 
-<h3>Stocks Owned</h3>
-<% @stocks_owned.each do |stock| %>
-    <%= stock[:name] %>
-    <%= stock[:units] %> units
-    <%= link_to "Buy",  buy_stock_path(@user.id, stock[:id]) %>
-    <%= link_to "Sell", sell_stock_path(@user.id, stock[:id]) %>
-    <br>
-<% end %>
+    <h3>Assets</h3>
+    <div class="row">
+        <% @stocks_owned.each do |stock| %>
+            <div class="col-3 p-2">
+                <div class="d-flex flex-column align-items-center">
+                    <div><%= stock[:units] %> units <%= stock[:code] %></div>
+                    <div><%= stock[:name] %></div>
+                    <div>
+                        <%= link_to "Buy",  buy_stock_path(@user.id, stock[:id]), class: "btn btn-outline-success" %>
+                        <%= link_to "Sell", sell_stock_path(@user.id, stock[:id]), class: "btn btn-outline-danger" %>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>
