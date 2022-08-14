@@ -29,7 +29,7 @@ class Users::DashboardController < ApplicationController
     @stocks_sold = @sell_transactions.map{ |transaction| transaction.stock }.uniq
 
     # Store each stock obj to an array and default units to 0
-    @user_stocks = @stocks_bought.map{ |stock| {id: stock.id, name: stock.name, units: 0} }
+    @user_stocks = @stocks_bought.map{ |stock| {id: stock.id, name: stock.name, units: 0, logo_url: stock.logo_url} }
     
     # Add all units from all buy transactions for each stock
     for i in 0...@stocks_bought.length do
