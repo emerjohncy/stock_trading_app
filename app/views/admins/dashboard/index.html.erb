@@ -1,30 +1,59 @@
-<h1>Admin</h1>
-  <table>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Balance</th>
-      <th>Status</th>
-      <th>Change Status</th>
-      <th>Action</th>
-    </tr>
-    <% @users.each do |user| %>
-    <tr>
-      <td><%= user.first_name %></td>
-      <td><%= user.last_name %></td>
-      <td><%= user.email %></td>
-      <td><%= user.balance %></td>
-      <td><%= user.status %></td>
-      <td><% @users.statuses.each_key do |status| %>
-        <%= link_to admins_change_status_path(user, {status: status}), "data-turbo-method" => :patch, class: "btn btn-primary", "data-no-turbolink" => true do %>
-          <%= status %>
-        <% end %>
-      <% end %>
-      </td>
-      <td><%= link_to "Edit", admins_edit_user_path(user) %> | <%= link_to "View", admins_view_user_path(user) %></td>
-    </tr>
-    <% end %>
-  </table>
-
   <%= link_to "Create New User", admins_dashboard_user_new_path %>
+
+  <div class="container">
+  <h2>Hello Admin</h2>
+  <p>Welcome to your workspace where you can create, update, and view users!</p>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">All Users</a></li>
+    <li><a data-toggle="tab" href="#menu1">Active Users</a></li>
+    <li><a data-toggle="tab" href="#menu2">Pending Users</a></li>
+    <li><a data-toggle="tab" href="#menu3">Create a New User</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>ALL USERS</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <table>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Balance</th>
+            <th>Status</th>
+            <th>Change Status</th>
+            <th>Action</th>
+          </tr>
+          <% @users.each do |user| %>
+          <tr>
+            <td><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.balance %></td>
+            <td><%= user.status %></td>
+            <td><% @users.statuses.each_key do |status| %>
+              <%= link_to admins_change_status_path(user, {status: status}), "data-turbo-method" => :patch, class: "btn btn-primary", "data-no-turbolink" => true do %>
+                <%= status %>
+              <% end %>
+            <% end %>
+            </td>
+            <td><%= link_to "Edit", admins_edit_user_path(user) %> | <%= link_to "View", admins_view_user_path(user) %></td>
+          </tr>
+          <% end %>
+        </table>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>ACTIVE USERS</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>PENDING USERS</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>CREATE A NEW USER</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+  </div>
+</div>
