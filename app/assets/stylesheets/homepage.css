@@ -10,6 +10,11 @@
   background-color: #2a66ff;
 }
 
+.navbar-brand {
+  font-weight: bolder;
+  font-size: 200px;
+}
+
 .nav-link, .nav-item a {
   color: #fff !important;
 }
