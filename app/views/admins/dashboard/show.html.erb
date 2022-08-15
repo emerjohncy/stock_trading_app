@@ -28,7 +28,7 @@
             <th scope="col">Date</th>
             <th scope="col">Stock code</th>
             <th scope="col">Stock name</th>
-            <th scope="col">action</th>
+            <th scope="col">Action</th>
             <th scope="col">Status</th>
             <th scope="col">Price</th>
             <th scope="col">Units</th>
@@ -52,6 +52,35 @@
     <div id="menu1" class="tab-pane fade">
       <h3>PORTFOLIO</h3>
       <p>Positions/Hold stocks</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Stock code</th>
+            <th scope="col">Stock name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Price</th>
+            <th scope="col">Units</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user.transactions.each do |transaction| %>
+            <% if transaction.status == "open" %>
+              <tr>
+                <th scope="row"><%= transaction.created_at %></th>
+                <td><%= transaction.stock.code %></td>
+                <td><%= transaction.stock.name %></td>
+                <td><%= transaction.action %></td>
+                <td><%= transaction.status %></td>
+                <td><%= transaction.price %></td>
+                <td><%= transaction.units %></td>
+                <td><%= transaction.units * transaction.price  %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
