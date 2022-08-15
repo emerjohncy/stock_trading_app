@@ -58,6 +58,7 @@
             <th scope="col">Date</th>
             <th scope="col">Stock code</th>
             <th scope="col">Stock name</th>
+            <th scope="col">Action</th>
             <th scope="col">Status</th>
             <th scope="col">Price</th>
             <th scope="col">Units</th>
@@ -65,8 +66,9 @@
           </tr>
         </thead>
         <tbody>
+          
           <% @user.transactions.each do |transaction| %>
-            <% if transaction.status == "open" %>
+            <% if transaction.status === "Open" %>
               <tr>
                 <th scope="row"><%= transaction.created_at %></th>
                 <td><%= transaction.stock.code %></td>
