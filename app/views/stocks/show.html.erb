@@ -2,7 +2,9 @@
     <div class="row">
         <div class="col-xl-1">
             <div class="d-flex flex-row justify-content-center align-items-center h-100">
+              <% if @stock.logo_url? %>
                 <%= image_tag(@stock.logo_url, class: "show-stock-logo") %>
+              <% end %>
             </div>
         </div>
         <div class="col">
