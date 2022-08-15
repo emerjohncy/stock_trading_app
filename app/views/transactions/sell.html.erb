@@ -1,11 +1,25 @@
-<br>
-<%= @stock.name %><br>
-<%= @stock.code %><br>
-<%= @stock.price %><br>
-
-<%= form_with model: [@stock, @transaction], url: sell_transactions_path(@user.id, @stock.id), local: true do |f| %>
-    <%= f.label :units %>
-    <%= f.number_field :units, min: 1 %>
-
-    <%= f.submit "Sell" %>
-<% end %>
+<div class="container-fluid vh-100">
+    <div class="row">
+        <div class="col-xl-1">
+            <div class="d-flex flex-row justify-content-center align-items-center h-100">
+                <%= image_tag(@stock.logo_url, class: "show-stock-logo") %>
+            </div>
+        </div>
+        <div class="col">
+            <div class="d-flex flex-row justify-content-between align-items-center h-100">
+                <div class="d-flex flex-column justify-content-center align-items-start">
+                    <div class="fw-bold fs-2"><%= @stock.code %></div>
+                    <div class="text-secondary fs-3"><%= @stock.name %></div>
+                </div>
+                <div class="fs-2 fw-bold px-1">$ <%= @stock.price %></div>
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <%= form_with model: [@stock, @transaction], url: sell_transactions_path(@user.id, @stock.id), class: "d-flex flex-row justify-content-center align-items-center h-100 w-100", local: true do |f| %>
+                <%#= f.label :units %>
+                <%= f.number_field :units, min: 1, max: @max_stocks, placeholder: "Enter number of units", class: "h-50 fs-4" %>
+                <%= f.submit "Sell", class: "fs-2 text-decoration-none btn btn-success w-25 p-0" %>
+            <% end %>
+        </div>
+    <div>
+<div>
