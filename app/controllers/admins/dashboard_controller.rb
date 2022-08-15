@@ -40,9 +40,9 @@ class Admins::DashboardController < ApplicationController
     if @user.update(status: params[:status])
       flash[:notice] = "Status updated to #{@user.status}"
       redirect_to admins_authenticated_root_path
-      if @user.status == "active"
-        UserMailer.with(user: @user).status_approve.deliver_now
-      end
+      # if @user.status == "active"
+      #   UserMailer.with(user: @user).status_approve.deliver_now
+      # end
     else
       flash.now[:alert] = "Something went wrong"
       render @user, status: :unprocessable_entity
