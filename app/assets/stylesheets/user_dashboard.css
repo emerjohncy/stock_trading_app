@@ -2,7 +2,7 @@
     width: 50px;
 }
 
-.all-stocks {
-    max-height: 80%;
+.dashboard-page {
+    max-height: 75vh;
     overflow-y: auto;
 }
