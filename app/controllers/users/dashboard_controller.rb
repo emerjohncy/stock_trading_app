@@ -4,7 +4,7 @@ class Users::DashboardController < ApplicationController
   def index
     @balance = @user.balance
     @stocks = Stock.all.order('created_at ASC')
-    @recent_transactions = @user.transactions.last(13).reverse
+    @recent_transactions = @user.transactions.last(12).reverse
     # if @user.transactions.exists?
     #   @user.transactions.each do |transaction|
     #     total = transaction.price * transaction.units
