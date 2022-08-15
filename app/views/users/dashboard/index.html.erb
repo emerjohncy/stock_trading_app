@@ -11,7 +11,7 @@
   <div class="row">
     <div class="col-lg-8">
       <h3 class="m-0">Available Stocks</h3>
-      <div class="row">
+      <div class="row all-stocks">
         <% @stocks.each do |stock| %>
           <%= link_to stock_path(stock.id), class: "col-xl-5 py-3 border-light shadow rounded m-2 align-middle text-decoration-none text-dark" do %>
           <div class="d-flex flex-row justify-content-between">
