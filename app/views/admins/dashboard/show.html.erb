@@ -1,19 +1,89 @@
-<h1> Profile User Id: <%= @user.id %> </h1>
-<p>First Name:<%= @user.first_name %></p>
-<p>Last Name:<%= @user.last_name %></p>
-<p>Email: <%= @user.email %></p>
-<p>Status: <%= @user.status %></p>
-<p>Balance: <%= @user.balance %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <%= image_tag("person-icon.png") %>
+    </div>
+    <div class="col-5">
+      <p><%= @user.first_name %><span><%= @user.last_name %></span></p>
+      <p><%= @user.email %></p>
+      <p><%= @user.status %></p>
+    </div>
+    <div class="col-5">
+      <p>Balance</p>
+      <p><%= @user.balance %></p>
+    </div>
+  </div>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Transactions</a></li>
+    <li><a data-toggle="tab" href="#menu1">Portfolio</a></li>
+  </ul>
 
-<h3>Transactions</h3>
-<% @user.transactions.each do |transaction| %>
-  <%= transaction.stock.name %><br>
-  <%= transaction.stock.code %><br>
-  <%= transaction.action %><br>
-  <%= transaction.status %><br>
-  <%= transaction.price %><br>
-  <%= transaction.units %><br>
-  <%= transaction.created_at %><br>
-  <br>
-<% end %>
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>TRANSACTIONS</h3>
+      <p>History buy and sell</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Stock code</th>
+            <th scope="col">Stock name</th>
+            <th scope="col">Action</th>
+            <th scope="col">Status</th>
+            <th scope="col">Price</th>
+            <th scope="col">Units</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user.transactions.each do |transaction| %>
+          <tr>
+            <th scope="row"><%= transaction.created_at %></th>
+            <td><%= transaction.stock.code %></td>
+            <td><%= transaction.stock.name %></td>
+            <td><%= transaction.action %></td>
+            <td><%= transaction.status %></td>
+            <td><%= transaction.price %></td>
+            <td><%= transaction.units %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>PORTFOLIO</h3>
+      <p>Positions/Hold stocks</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Stock code</th>
+            <th scope="col">Stock name</th>
+            <th scope="col">Action</th>
+            <th scope="col">Status</th>
+            <th scope="col">Price</th>
+            <th scope="col">Units</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <% @user.transactions.each do |transaction| %>
+            <% if transaction.status === "Open" %>
+              <tr>
+                <th scope="row"><%= transaction.created_at %></th>
+                <td><%= transaction.stock.code %></td>
+                <td><%= transaction.stock.name %></td>
+                <td><%= transaction.action %></td>
+                <td><%= transaction.status %></td>
+                <td><%= transaction.price %></td>
+                <td><%= transaction.units %></td>
+                <td><%= transaction.units * transaction.price  %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
