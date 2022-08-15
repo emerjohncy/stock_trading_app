@@ -33,3 +33,13 @@ footer p {
   margin: 0;
 }
 
+.start-trading {
+  color: #000;
+}
+
+.start-trading button:hover {
+  color: #fff;
+  background-color: #2a66ff;
+}
+
+
