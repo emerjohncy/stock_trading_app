@@ -1,10 +1,38 @@
-<br>
-<% @transactions.each do |transaction| %>
-    <%= transaction.stock_id %><br>
-    <%= transaction.action %><br>
-    <%= transaction.status %><br>
-    <%= transaction.price %><br>
-    <%= transaction.units %><br>
-    <%= transaction.created_at %><br>
-    <br>
-<% end %>
+<div class="container-fluid">
+    <div class="d-flex justify-content-center">
+        <div class="col-10">
+            <h1><%= @stock.code %> Buy Transactions</h1>
+            <% @transactions.each do |transaction| %>
+                <div class="px-4 py-2 mb-3 border-light shadow rounded">
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <div class="d-flex flex-row justify-content-start align-items-center">
+                            <i class="bi bi-arrow-down-left-square text-success fs-1"></i>
+                            <%= image_tag(transaction.stock.logo_url, class: "dashboard-stock-logo ms-4")%>
+                            <div class="d-flex flex-column justify-content-center ms-2">
+                                <div class="fw-bold"><%= transaction.action %> <%= transaction.stock.code %></div>
+                                <div class="text-secondary"><%= transaction.stock.name %></div>
+                                <div class="text-secondary"><%= transaction.created_at %></div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-row justify-content-center align-items-center">
+                            <div class="d-flex flex-column justify-content-center align-items-end mx-3">
+                                <div class="fw-bold">
+                                    <% if transaction.units == 1 %>
+                                        <%= transaction.units %> unit
+                                    <% else %>
+                                        <%= transaction.units %> units
+                                    <% end %>
+                                </div>
+                                <div class="text-secondary">$ <%= transaction.price %></div>
+                            </div>
+                            <div class="text-primary fw-bold fs-3">
+                                $ <%= (transaction.price * transaction.units) %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

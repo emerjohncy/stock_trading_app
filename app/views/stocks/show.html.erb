@@ -1,7 +1,7 @@
 <div class="container-fluid vh-100">
     <div class="row">
         <div class="col-xl-1">
-            <div class="d-flex flex-row justify-content-center align-items-center">
+            <div class="d-flex flex-row justify-content-center align-items-center h-100">
                 <%= image_tag(@stock.logo_url, class: "show-stock-logo") %>
             </div>
         </div>
@@ -20,7 +20,5 @@
                 <%= link_to "Buy", buy_stock_path(@user.id, @stock.id), class: "fs-2 text-decoration-none btn btn-success w-50 p-0" %>
             </div>
         </div>
-
-
     </div>
 </div>
