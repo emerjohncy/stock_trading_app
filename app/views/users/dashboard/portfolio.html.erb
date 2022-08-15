@@ -24,7 +24,9 @@
 
                         <div class="d-flex flex-column align-items-center pt-5 m-2">
                             <div class="d-flex flex-row">
+                              <% if stock[:logo_url] %>
                                 <%= image_tag(stock[:logo_url], class: "portfolio-stock-logo") %>
+                              <% end %>
                                 <div class="d-flex flex-column justify-content-between">
                                     <div class="mx-2 fw-bold"><%= stock[:code] %></div>
                                     <% if stock[:change].to_i > 0 %>
