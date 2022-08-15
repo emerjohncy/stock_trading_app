@@ -2,7 +2,7 @@ class Admins::DashboardController < ApplicationController
   before_action :set_user, only: %i[ show edit update change_status ]
   
   def index
-    @users = User.all
+    @users = User.all.order('created_at ASC')
   end
 
   def new
