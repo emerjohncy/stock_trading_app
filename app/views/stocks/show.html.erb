@@ -1,4 +1,4 @@
-<div class="container-fluid vh-100">
+<div class="container">
   <div class="row">
     <div class="col-xl-1">
       <div class="d-flex flex-row justify-content-center align-items-center h-100">
@@ -23,8 +23,8 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="stock-chart">
       <h1>Chart</h1>
-      <%= @stock.chart %>
+      <%= line_chart Stock.group_by_day(:created_at).count %>
     </div>
 </div>

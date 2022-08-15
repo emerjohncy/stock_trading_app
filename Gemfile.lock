@@ -144,6 +144,8 @@ GEM
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    groupdate (6.1.0)
+      activesupport (>= 5.2)
     hamlit (2.16.0)
       temple (>= 0.8.2)
       thor
@@ -392,6 +394,7 @@ DEPENDENCIES
   debug
   devise
   factory_bot_rails
+  groupdate
   hamlit-rails
   iex-ruby-client
   importmap-rails
