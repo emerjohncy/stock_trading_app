@@ -1,9 +1,19 @@
-<h1> Profile User Id: <%= @user.id %> </h1>
-<p>First Name:<%= @user.first_name %></p>
-<p>Last Name:<%= @user.last_name %></p>
-<p>Email: <%= @user.email %></p>
-<p>Status: <%= @user.status %></p>
-<p>Balance: <%= @user.balance %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <%= image_tag("person-icon.png") %>
+    </div>
+    <div class="col-5">
+      <p><%= @user.first_name %><span><%= @user.last_name %></span></p>
+      <p><%= @user.email %></p>
+      <p><%= @user.status %></p>
+    </div>
+    <div class="col-5">
+      <p>Balance</p>
+      <p><%= @user.balance %></p>
+    </div>
+  </div>
+</div>
 
 <h3>Transactions</h3>
 <% @user.transactions.each do |transaction| %>
