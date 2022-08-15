@@ -13,17 +13,46 @@
       <p><%= @user.balance %></p>
     </div>
   </div>
-</div>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Transactions</a></li>
+    <li><a data-toggle="tab" href="#menu1">Portfolio</a></li>
+  </ul>
 
-<h3>Transactions</h3>
-<% @user.transactions.each do |transaction| %>
-  <%= transaction.stock.name %><br>
-  <%= transaction.stock.code %><br>
-  <%= transaction.action %><br>
-  <%= transaction.status %><br>
-  <%= transaction.price %><br>
-  <%= transaction.units %><br>
-  <%= transaction.created_at %><br>
-  <br>
-<% end %>
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>TRANSACTIONS</h3>
+      <p>History buy and sell</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Stock code</th>
+            <th scope="col">Stock name</th>
+            <th scope="col">action</th>
+            <th scope="col">Status</th>
+            <th scope="col">Price</th>
+            <th scope="col">Units</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user.transactions.each do |transaction| %>
+          <tr>
+            <th scope="row"><%= transaction.created_at %></th>
+            <td><%= transaction.stock.code %></td>
+            <td><%= transaction.stock.name %></td>
+            <td><%= transaction.action %></td>
+            <td><%= transaction.status %></td>
+            <td><%= transaction.price %></td>
+            <td><%= transaction.units %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>PORTFOLIO</h3>
+      <p>Positions/Hold stocks</p>
+    </div>
+  </div>
+</div>
 
