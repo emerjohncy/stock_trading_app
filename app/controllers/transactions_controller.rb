@@ -56,7 +56,7 @@ class TransactionsController < ApplicationController
         @transaction.status = "Close"
         @transaction.price = @stock.price
 
-        # Get max stocks that can be bought
+        # Get max stocks that can be sold
         @max_stocks = 0
         @buy_transactions = @user.transactions.where(action: "Buy")
         @buy_stock_transactions = @buy_transactions.where(stock_id: @stock.id)
