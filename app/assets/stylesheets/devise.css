@@ -11,7 +11,7 @@
 
 #user_email, #user_password, 
 #user_first_name, #user_last_name, 
-#user_password_confirmation, #admin_email, #admin_password {
+#user_password_confirmation, #admin_email, #admin_password, #user_current_password {
   width: 50%;
 }
 
